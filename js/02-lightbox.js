@@ -6,11 +6,11 @@ console.log(galleryItems);
 const galleryEl = document.querySelector(`.gallery`)
 const imgMarkup = createGallery(galleryItems);
 galleryEl.insertAdjacentHTML('beforeend', imgMarkup)
-console.log(imgMarkup);
 
 function createGallery(gallery) {
     return gallery.map(({ preview, original, description }) => {
-    return `<li>
+        return `
+            <li>
                 <a class="gallery__link" href="${original}">
                     <img
                     class="gallery__image"
@@ -18,8 +18,9 @@ function createGallery(gallery) {
                     data-source="${original}"
                     alt="${description}"
                     />
-            </a>
-        </li>`;
+                </a>
+            </li>
+        `;
     })
     .join('')
 }
