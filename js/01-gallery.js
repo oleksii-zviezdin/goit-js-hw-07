@@ -25,7 +25,7 @@ function createGallery(gallery) {
 
 galleryEl.addEventListener(`click`, handleClickOnGalleryEl)
 
-function handleClickOnGalleryEl(e) {    
+function handleClickOnGalleryEl(e) {
     e.preventDefault()
     if (e.target.nodeName !== 'IMG') {
         return;
@@ -35,13 +35,18 @@ function handleClickOnGalleryEl(e) {
     <div class="modal">
         <img src="${e.target.dataset.source}">
     </div>
-`)
+    `,{
+	onShow: (instance) => { document.addEventListener(`keydown`, escModal) },
+	onClose: (instance) => { document.removeEventListener(`keydown`, escModal) }
+})
     instance.show();
+    
+    // document.addEventListener(`keydown`, escModal, {once: true})
 
-    document.addEventListener(`keydown`, escModal, {once: true})
-    function escModal({code}) {
-        if (code === `Escape`) {
-        instance.close();
+    function escModal({ code }) {
+            if (code === `Escape`) {
+                instance.close();
+            }
         }
-    }
+    
 }
